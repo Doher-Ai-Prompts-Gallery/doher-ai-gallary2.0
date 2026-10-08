@@ -22,6 +22,7 @@ import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage
 import { auth, db, storage, retryFirebaseOperation } from '../lib/firebase';
 import { useApp } from '../context/AppContext';
 import { Category, Prompt } from '../types';
+import logoImg from '../assets/images/doher_logo_1790309001039.jpg';
 import { 
   LayoutDashboard, 
   Plus, 
@@ -333,7 +334,7 @@ export const Admin: React.FC = () => {
       <div className="min-h-[80vh] flex items-center justify-center p-4">
         <div className="glass-card w-full max-w-md p-8">
           <div className="flex flex-col items-center mb-8">
-            <img src="/src/assets/images/doher_logo_1790309001039.jpg" alt="Logo" className="w-20 h-20 mb-4" />
+            <img src={logoImg} alt="Logo" className="w-20 h-20 mb-4" />
             <h2 className="text-2xl font-black gold-text">ADMIN LOGIN</h2>
           </div>
           <form onSubmit={handleLogin} className="space-y-6">
@@ -373,7 +374,7 @@ export const Admin: React.FC = () => {
         {/* Sidebar */}
         <aside className="lg:w-64 space-y-2">
           <div className="glass-card p-6 mb-6 text-center">
-             <img src="/src/assets/images/doher_logo_1790309001039.jpg" alt="Logo" className="w-16 h-16 mx-auto mb-4" />
+             <img src={logoImg} alt="Logo" className="w-16 h-16 mx-auto mb-4" />
              <p className="text-xs font-bold text-brand-gold">ADMINISTRATION</p>
           </div>
           

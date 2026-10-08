@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { reconnectFirestore } from '../lib/firebase';
+import loadingImg from '../assets/images/lod_animation_1790308985475.jpg';
 
 interface AppContextType {
   setLoading: (loading: boolean) => void;
@@ -64,7 +65,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
           >
             <div className="flex flex-col items-center gap-4">
               <img 
-                src="/src/assets/images/lod_animation_1790308985475.jpg" 
+                src={loadingImg} 
                 alt="Loading..." 
                 className="w-24 h-24 object-contain animate-pulse"
               />

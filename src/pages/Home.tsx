@@ -7,6 +7,7 @@ import { PlaceholderModal } from '../components/PlaceholderModal';
 import { useApp } from '../context/AppContext';
 import { Search, Filter, ArrowRight, WifiOff, RefreshCcw } from 'lucide-react';
 import { detectPlaceholders } from '../lib/placeholder';
+import logoImg from '../assets/images/doher_logo_1790309001039.jpg';
 
 export const Home: React.FC = () => {
   const { setLoading, setRetryAction } = useApp();
@@ -84,7 +85,7 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/20 via-brand-bg/60 to-brand-bg z-10" />
           <img 
-            src="/src/assets/images/doher_logo_1790309001039.jpg" 
+            src={logoImg} 
             alt="Hero Background" 
             className="w-full h-full object-cover opacity-20 blur-sm scale-110"
           />

@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, LogIn, LogOut, User } from 'lucide-react';
 import { auth } from '../lib/firebase';
 import { signOut } from 'firebase/auth';
+import logoImg from '../assets/images/doher_logo_1790309001039.jpg';
 
 export const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -15,10 +16,29 @@ export const Navbar: React.FC = () => {
     navigate('/');
   };
 
+  const scrollToSection = (hash: string) => {
+    setIsMenuOpen(false);
+    if (!hash) {
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const id = hash.replace('#', '');
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
+
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Categories', path: '/#categories' },
-    { name: 'Explore', path: '/#explore' },
+    { name: 'Home', hash: '' },
+    { name: 'Categories', hash: '#categories' },
+    { name: 'Explore', hash: '#explore' },
   ];
 
   return (
@@ -28,7 +48,7 @@ export const Navbar: React.FC = () => {
         <Link to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-full border border-brand-gold/30 p-1 flex items-center justify-center overflow-hidden bg-black">
              <img 
-               src="/src/assets/images/doher_logo_1790309001039.jpg" 
+               src={logoImg} 
                alt="DOHER Logo" 
                className="w-full h-full object-contain group-hover:scale-110 transition-transform"
              />
@@ -42,13 +62,13 @@ export const Navbar: React.FC = () => {
         {/* Zone 2: Navigation Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link 
+            <button 
               key={link.name} 
-              to={link.path}
-              className="text-sm font-bold text-gray-400 hover:text-brand-gold transition-colors tracking-wide"
+              onClick={() => scrollToSection(link.hash)}
+              className="text-sm font-bold text-gray-400 hover:text-brand-gold transition-colors tracking-wide cursor-pointer"
             >
               {link.name}
-            </Link>
+            </button>
           ))}
         </nav>
 
@@ -94,14 +114,13 @@ export const Navbar: React.FC = () => {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <Link 
+                <button 
                   key={link.name} 
-                  to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-lg font-bold text-gray-300 hover:text-brand-gold"
+                  onClick={() => scrollToSection(link.hash)}
+                  className="text-left text-lg font-bold text-gray-300 hover:text-brand-gold cursor-pointer"
                 >
                   {link.name}
-                </Link>
+                </button>
               ))}
               {user && (
                 <Link 
