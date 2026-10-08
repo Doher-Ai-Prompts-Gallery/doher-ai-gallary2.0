@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Admins collection
+    match /admins/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      // Only existing admins can create new admins, or manual setup
+      allow write: if isAdmin();
+    }
+
+    // Categories collection
+    match /categories/{categoryId} {
+      allow read: if true; // Publicly readable
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Prompts collection
+    match /prompts/{promptId} {
+      allow read: if (resource != null && resource.data.published == true) || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}

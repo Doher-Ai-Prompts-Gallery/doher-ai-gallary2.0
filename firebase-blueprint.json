@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "Category": {
+      "title": "Category",
+      "description": "Image prompt category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 50 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "Prompt": {
+      "title": "Prompt",
+      "description": "AI image prompt with metadata",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "prompt": { "type": "string", "minLength": 1, "maxLength": 5000 },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "storagePath": { "type": "string" },
+        "published": { "type": "boolean" },
+        "useCustomViews": { "type": "boolean" },
+        "customViews": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "views": { "type": "integer" }
+      },
+      "required": ["title", "prompt", "categoryId", "published"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Authorized administrator",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "List of prompt categories"
+    },
+    "/prompts/{promptId}": {
+      "schema": "Prompt",
+      "description": "Collection of image prompts"
+    },
+    "/admins/{userId}": {
+      "schema": "Admin",
+      "description": "Authorized admin users"
+    }
+  }
+}

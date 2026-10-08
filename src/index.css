@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-gold: #D4AF37;
+  --color-brand-gold-light: #F9E27D;
+  --color-brand-gold-dark: #A67C00;
+  --color-brand-bg: #05070A;
+  --color-brand-panel: #0D1117;
+  --color-brand-panel-hover: #161B22;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-gray-200 antialiased selection:bg-brand-gold selection:text-black;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  * {
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-brand-panel/80 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden;
+  }
+  
+  .gold-gradient {
+    @apply bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-light;
+  }
+  
+  .gold-text {
+    @apply bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-light bg-clip-text text-transparent;
+  }
+
+  .gold-button {
+    @apply px-6 py-2.5 rounded-lg bg-brand-gold text-black font-bold hover:bg-brand-gold-light transition-all duration-300 shadow-lg shadow-brand-gold/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .outline-button {
+    @apply px-6 py-2.5 rounded-lg border border-brand-gold text-brand-gold font-bold hover:bg-brand-gold/10 transition-all duration-300 active:scale-95 disabled:opacity-50;
+  }
+
+  .input-field {
+    @apply w-full bg-brand-panel border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-brand-gold transition-colors;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-brand-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-panel border-2 border-brand-bg rounded-full hover:bg-brand-gold/50;
+}
+

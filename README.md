@@ -1,11 +1,22 @@
-<div align="center">
+# DOHER AI GALLERY
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Premium AI image inspiration and prompt gallery platform.
 
-  <h1>Built with AI Studio</h2>
+## Features
+- **Curated Prompt Gallery**: Discover high-quality AI image prompts.
+- **Dynamic Placeholders**: Automatically detect and replace placeholders like #name, #company, etc.
+- **Luxury Design**: Dark luxury theme with gold accents, optimized for desktop and mobile.
+- **Admin Control**: Full management of categories and prompts via Firebase.
+- **Robust Connection**: Exponential backoff retries and persistent local cache for unstable networks.
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Running the Project
+IMPORTANT: This project must be served via HTTP. Do NOT open `index.html` directly using `file://`.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+To run locally:
+1. Ensure you have Node.js installed.
+2. Run `npm install` (or use a simple server like `npx serve .`).
+3. Open `http://localhost:3000` in your browser.
 
-</div>
+## Security
+- Firestore and Storage rules are provided in the root directory.
+- Admin access is restricted to users in the `admins` collection.
