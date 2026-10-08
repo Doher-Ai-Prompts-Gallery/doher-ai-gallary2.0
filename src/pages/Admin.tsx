@@ -157,11 +157,21 @@ export const Admin: React.FC = () => {
       }
 
       const category = categories.find(c => c.id === promptForm.categoryId);
+      const existingPrompt = (isEditingPrompt && editingPromptId) 
+        ? prompts.find(p => p.id === editingPromptId) 
+        : null;
+      const safeStoragePath = storagePath || existingPrompt?.storagePath || '';
+
       const promptData = {
-        ...promptForm,
+        title: promptForm.title || '',
+        prompt: promptForm.prompt || '',
+        categoryId: promptForm.categoryId || '',
         categoryName: category?.name || '',
-        imageUrl: finalImageUrl,
-        storagePath: storagePath || (isEditingPrompt ? prompts.find(p => p.id === editingPromptId)?.storagePath : ''),
+        imageUrl: finalImageUrl || '',
+        published: typeof promptForm.published === 'boolean' ? promptForm.published : true,
+        useCustomViews: Boolean(promptForm.useCustomViews),
+        customViews: promptForm.customViews || '',
+        storagePath: safeStoragePath,
         updatedAt: serverTimestamp()
       };
 
