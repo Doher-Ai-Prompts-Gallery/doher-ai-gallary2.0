@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DOHER AI GALLERY</title>
+    <script>
+      // Single Page Apps for GitHub Pages
+      // If someone opens https://<user>.github.io/<repo>/admin, redirect to /<repo>/#/admin
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      var repoPath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+      var routePath = l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/');
+      l.replace(
+        l.protocol + '//' + l.host + repoPath + '/#' + (routePath ? '/' + routePath : '') +
+        (l.search ? '?' + l.search.slice(1) : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
